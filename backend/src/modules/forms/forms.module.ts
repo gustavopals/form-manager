@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { FormDesignerController } from './form-designer/form-designer.controller';
+import { PrismaService } from 'src/shared/services/prisma.service';
 
 @Module({
   imports: [],
   controllers: [FormDesignerController],
-  providers: [],
+  providers: [PrismaService],
 })
 export class FormsModule {}

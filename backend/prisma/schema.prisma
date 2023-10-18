@@ -14,3 +14,36 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model FormTable {
+  id        Int         @id @unique @default(autoincrement())
+  tableName String      @unique
+  code      String
+  captionBr String
+  captionEn String
+  captionEs String
+  deleted   Boolean     @default(false)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  FormField FormField[]
+}
+
+model FormField {
+  id          Int       @id @default(autoincrement())
+  formTableId Int
+  formTable   FormTable @relation(fields: [formTableId], references: [id])
+  fieldName   String
+  captionBr   String
+  captionEn   String
+  captionEs   String
+  component   String
+  grid        Int
+  order       Int
+  isNewLine   Boolean
+  required    Boolean
+  iniValue    String
+  help        String
+  deleted     Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
