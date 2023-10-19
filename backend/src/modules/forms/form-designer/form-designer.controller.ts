@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { PrismaService } from 'src/shared/services/prisma.service';
 
@@ -40,6 +48,7 @@ export class FormDesignerController {
       const result = await this.prisma.formTable.upsert({
         where: {
           id: id,
+          tableName: rest.tableName,
         },
         update: rest,
         create: rest,
@@ -49,7 +58,35 @@ export class FormDesignerController {
       });
       return res.json(result);
     } catch (error) {
-      return res.json(error).status(500);
+      return res.json(error.message).status(500);
+    }
+  }
+
+  @Delete(':id')
+  async delete(@Param() params, @Res() res: Response) {
+    try {
+      const result = await this.prisma.formTable.update({
+        where: {
+          id: parseInt(params.id),
+        },
+        data: {
+          deleted: true,
+        },
+      });
+
+      // delete all form fields
+      await this.prisma.formField.updateMany({
+        where: {
+          formTableId: parseInt(params.id),
+        },
+        data: {
+          deleted: true,
+        },
+      });
+
+      return res.json(result);
+    } catch (error) {
+      return res.json(error.message).status(500);
     }
   }
 }
