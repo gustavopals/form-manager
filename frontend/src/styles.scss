@@ -1,0 +1,47 @@
+:root {
+  --side-menu-background: #2c3739;
+  --side-menu-border: #20292b;
+
+  --color-brand-01-lightest: #b4e2fd;
+  --color-brand-01-lighter: #69c5fc;
+  --color-brand-01-light: #12a2f7;
+  --color-brand-01-base: #045b8f;
+  --color-brand-01-dark: #013f65;
+  --color-brand-01-darker: #002944;
+  --color-brand-01-darkest: #00182b;
+  --color-brand-02-base: #045b8f;
+  --color-brand-03-base: #045b8f;
+  --color-neutral-dark-70: #4d4d4d;
+  --color-neutral-dark-80: #363636;
+  --color-neutral-dark-90: #1a1a1a;
+  --color-neutral-dark-95: #0d0d0d;
+  --color-neutral-light-00: #ffffff;
+  --color-neutral-light-05: #fafafa;
+  --color-neutral-light-10: #e5e5e5;
+  --color-neutral-light-20: #cccccc;
+  --color-neutral-light-30: #b2b2b2;
+  --color-neutral-mid-40: #999999;
+  --color-neutral-mid-60: #666666;
+
+  .po-toolbar {
+    background-color: #fafafa;
+  }
+
+  .po-page {
+    background-color: #fafafa;
+  }
+
+  .po-menu {
+    background-color: var(--side-menu-background);
+    border: solid 1px var(--side-menu-border);
+  }
+
+  .po-menu-item {
+    color: #ffffff;
+  }
+
+  .po-modal-content,
+  .po-modal-body {
+    max-width: 1144px !important;
+  }
+}

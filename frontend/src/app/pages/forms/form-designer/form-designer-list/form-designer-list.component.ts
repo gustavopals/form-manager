@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PoBreadcrumb, PoPageAction, PoPageFilter, PoTableColumn } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoPageAction, PoPageFilter, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { RestService } from 'src/app/services/rest.service';
 
 @Component({
   selector: 'app-form-designer-list',
@@ -10,19 +11,50 @@ import { PoBreadcrumb, PoPageAction, PoPageFilter, PoTableColumn } from '@po-ui/
 export class FormDesignerListComponent {
 
   constructor(
-    private router: Router
-  ) { }
+    private router: Router,
+    private rest: RestService
+  ) {
+    this.getData();
+  }
 
   public readonly actions: Array<PoPageAction> = [
     { label: 'New', url: '/form-designer/new' },
+    { label: 'Refresh', action: this.getData.bind(this) },
   ];
 
   public readonly breadcrumb: PoBreadcrumb = {
     items: [
       { label: 'Home', action: () => this.router.navigate(['/']) },
-      { label: 'Form Designer'}
+      { label: 'Form Designer' }
     ]
   };
+
+  tableDataColumns: Array<PoTableColumn> = [
+    {
+      property: 'id',
+      label: 'ID',
+      visible: false,
+    },
+    {
+      property: 'tableName',
+      label: 'Table Name',
+    },
+    {
+      property: 'code',
+      label: 'Code',
+    },
+    {
+      property: 'captionBr',
+      label: 'Caption BR',
+    }
+  ];
+  tableDataActions: Array<PoTableAction> = [
+    {
+      label: 'Edit',
+      action: this.edit.bind(this),
+    }
+  ]
+  tableData: Array<object> = [];
 
   public readonly filterSettings: PoPageFilter = {
     action: this.filterAction.bind(this),
@@ -40,29 +72,15 @@ export class FormDesignerListComponent {
     // this.advancedFilterModal.open();
   }
 
-  tableDataColumns: Array<PoTableColumn> = [
-    {
-      property: 'id',
-      label: 'ID',
-    },
-    {
-      property: 'name',
-      label: 'Name',
+  getData() {
+    this.rest.get('/forms/form-designer').subscribe((res: any) => {
+      this.tableData = res;
     }
-  ];
-  tableData: Array<object> = [
-    {
-      id: 1,
-      name: 'Form 1',
-    },
-    {
-      id: 2,
-      name: 'Form 1',
-    },
-    {
-      id: 3,
-      name: 'Form 1',
-    },
-  ];
+    );
+  }
+
+  edit(item: any) {
+    this.router.navigate([`/form-designer/edit/${item.id}`]);
+  }
 
 }
