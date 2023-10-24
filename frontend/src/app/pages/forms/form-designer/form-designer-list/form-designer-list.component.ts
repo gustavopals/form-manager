@@ -18,7 +18,10 @@ export class FormDesignerListComponent {
   ];
 
   public readonly breadcrumb: PoBreadcrumb = {
-    items: [{ label: 'Home', action: () => this.router.navigate(['/']) }, { label: 'Home' }]
+    items: [
+      { label: 'Home', action: () => this.router.navigate(['/']) },
+      { label: 'Form Designer'}
+    ]
   };
 
   public readonly filterSettings: PoPageFilter = {
