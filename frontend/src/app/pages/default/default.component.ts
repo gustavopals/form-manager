@@ -8,7 +8,8 @@ import { PoMenuItem } from '@po-ui/ng-components';
 })
 export class DefaultComponent {
   readonly menus: Array<PoMenuItem> = [
-    { label: 'Home', action: this.onClick.bind(this) }
+    { label: 'Home', link: '/' },
+    { label: 'Form Designer', link: '/form-designer' }
   ];
 
   private onClick() {

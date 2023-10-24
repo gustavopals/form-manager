@@ -11,12 +11,16 @@ import { PoTemplatesModule } from '@po-ui/ng-templates';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { DefaultComponent } from './pages/default/default.component';
+import { FormDesignerListComponent } from './pages/forms/form-designer/form-designer-list/form-designer-list.component';
+import { FormDesignerEditComponent } from './pages/forms/form-designer/form-designer-edit/form-designer-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DefaultComponent
+    DefaultComponent,
+    FormDesignerListComponent,
+    FormDesignerEditComponent
   ],
   imports: [
     BrowserModule,

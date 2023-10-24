@@ -1,3 +1,31 @@
-<po-page-default p-title="AppName">
-  <p>AppName page</p>
+<po-page-default p-title="Home">
+  <div class="po-row">
+    <po-widget
+      class="po-sm-12 po-md-8 po-lg-6"
+      [p-height]="250"
+      p-title="Dev Info"
+      p-primary-label="Call"
+      p-secondary-label="Send e-mail"
+      (p-primary-action)="callContact(contact.phone)"
+      (p-secondary-action)="sendContact(contact.email)"
+    >
+      <po-avatar
+        class="po-md-4"
+        p-size="lg"
+        [p-src]="avatar"
+        (p-click)="modal.open()"
+      >
+      </po-avatar>
+
+      <div class="po-md-8">
+        <p><strong>Name:</strong> {{ contact.name }}</p>
+        <p><strong>Phone:</strong> {{ formatPhoneNumber(contact.phone) }}</p>
+        <p><strong>E-mail:</strong> {{ contact.email }}</p>
+      </div>
+    </po-widget>
+  </div>
+
+  <po-modal #modal p-title="Profile Image">
+    <img [src]="avatar" class="sample-center-image" />
+  </po-modal>
 </po-page-default>
