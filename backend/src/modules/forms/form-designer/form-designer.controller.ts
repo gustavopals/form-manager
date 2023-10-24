@@ -5,10 +5,11 @@ import {
   Get,
   Param,
   Post,
+  Req,
   Res,
 } from '@nestjs/common';
 import { FormTable } from '@prisma/client';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { PrismaService } from 'src/shared/services/prisma.service';
 
 @Controller('form-designer')
@@ -37,10 +38,11 @@ export class FormDesignerController {
     }
   }
 
-  @Delete(':id')
-  async handleDelete(@Param() params, @Res() res: Response) {
+  @Delete()
+  async handleDelete(@Req() req: Request, @Res() res: Response) {
     try {
-      const result = await this.delete(parseInt(params.id));
+      const data: any = req.query;
+      const result = await this.delete(parseInt(data.id));
       return res.json(result);
     } catch (error) {
       return res.json(error.message).status(500);

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PoBreadcrumb, PoPageAction, PoPageFilter, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { RestService } from 'src/app/services/rest.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-form-designer-list',
@@ -54,6 +55,7 @@ export class FormDesignerListComponent {
       action: this.edit.bind(this),
     }
   ]
+  deleteService: string = `${environment.baseUrl}/forms/form-designer`;
   tableData: Array<object> = [];
 
   public readonly filterSettings: PoPageFilter = {
@@ -82,5 +84,4 @@ export class FormDesignerListComponent {
   edit(item: any) {
     this.router.navigate([`/form-designer/edit/${item.id}`]);
   }
-
 }
