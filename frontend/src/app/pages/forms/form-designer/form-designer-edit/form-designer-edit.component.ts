@@ -39,12 +39,22 @@ export class FormDesignerEditComponent {
       captionEn: ['', [Validators.required]],
       captionEs: ['', [Validators.required]],
     });
+
+    if (this.id) this.getData()
+  }
+
+  getData() {
+    this.rest.get(`/forms/form-designer/${this.id}`).subscribe((res: any) => {
+      this.myForm.patchValue(res);
+    }, (err: any) => {
+      console.log(err);
+    });
   }
 
   save() {
     if (this.myForm.valid) {
       const data = this.myForm.value;
-      if (this.id) data.id = this.id;
+      if (this.id) data.id = parseInt(this.id);
 
       this.rest.post('/forms/form-designer', data).subscribe((res: any) => {
         console.log(res);
