@@ -1,1 +1,56 @@
-<p>form-designer-edit works!</p>
+<po-page-edit
+  p-title="Form Designer"
+  [p-breadcrumb]="breadcrumb"
+  (p-save)="save()"
+  (p-cancel)="cancel()"
+>
+  <form [formGroup]="myForm">
+    <div class="po-row">
+      <po-input
+        class="po-md-6"
+        name="tableName"
+        formControlName="tableName"
+        p-label="Table Name"
+        p-clean
+        p-required
+      >
+      </po-input>
+      <po-input
+        class="po-md-6"
+        name="code"
+        formControlName="code"
+        p-label="Code"
+        p-clean
+        p-required
+      >
+      </po-input>
+      <po-input
+        class="po-md-4"
+        name="captionBr"
+        formControlName="captionBr"
+        p-label="Caption BR"
+        p-clean
+        p-required
+      >
+      </po-input>
+      <po-input
+        class="po-md-4"
+        name="captionEn"
+        formControlName="captionEn"
+        p-label="Caption EN"
+        p-clean
+        p-required
+      >
+      </po-input>
+      <po-input
+        class="po-md-4"
+        name="captionEs"
+        formControlName="captionEs"
+        p-label="Caption ES"
+        p-clean
+        p-required
+      >
+      </po-input>
+    </div>
+  </form>
+</po-page-edit>
