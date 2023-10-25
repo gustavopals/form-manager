@@ -53,26 +53,134 @@
       </po-input>
     </div>
   </form>
-  <po-divider p-label="Fields"></po-divider>
+
+  <!-- Detail -->
+
   <div class="detail">
-    <!-- align button to the right -->
-    <div class="po-row" style="justify-content: flex-end">
-      <po-button class="po-md" p-label="Add" (p-click)="addFormField()">
-      </po-button>
-    </div>
     <po-table
       p-sort
       p-striped
       p-actions-right
-      p-single-select
       [p-selectable]="true"
       [p-items]="modalItemsData"
       [p-columns]="modalItemsColumns"
       [p-actions]="modalItemsActions"
     ></po-table>
+    <br />
+    <div class="po-row" style="justify-content: flex-end">
+      <po-button class="po-md" p-label="Add" (p-click)="addFormField()">
+      </po-button>
+    </div>
   </div>
 
+  <!-- Modal -->
+
   <div class="modal">
-    <po-modal #modalItems p-title="PO Modal"> We are TOTVERS!!! </po-modal>
+    <po-modal
+      #modalItems
+      p-title="Form Field"
+      [p-primary-action]="saveFormFieldAction"
+    >
+      <form [formGroup]="myFormItems">
+        <div class="po-row">
+          <po-input
+            class="po-md-4"
+            name="fieldName"
+            formControlName="fieldName"
+            p-label="Field Name"
+            p-clean
+            p-required
+          >
+          </po-input>
+          <po-input
+            class="po-md-4"
+            name="captionBr"
+            formControlName="captionBr"
+            p-label="Caption BR"
+            p-clean
+            p-required
+          >
+          </po-input>
+          <po-input
+            class="po-md-4"
+            name="captionEn"
+            formControlName="captionEn"
+            p-label="Caption EN"
+            p-clean
+            p-required
+          >
+          </po-input>
+          <po-input
+            class="po-md-4"
+            name="captionEs"
+            formControlName="captionEs"
+            p-label="Caption ES"
+            p-clean
+            p-required
+          >
+          </po-input>
+          <po-select
+            class="po-md-4"
+            name="component"
+            formControlName="component"
+            p-label="Component"
+            [p-options]="myFormItemsComponentOptions"
+            p-clean
+            p-required
+          ></po-select>
+          <po-number
+            class="po-md-4"
+            name="grid"
+            formControlName="grid"
+            p-label="Grid"
+            [minlength]="1"
+            [maxlength]="12"
+            p-clean
+            p-required
+          ></po-number>
+          <po-number
+            class="po-md-4"
+            name="order"
+            formControlName="order"
+            p-label="Order"
+            [minlength]="1"
+            p-clean
+            p-required
+          ></po-number>
+          <po-switch
+            class="po-md-4"
+            name="isNewLine"
+            formControlName="isNewLine"
+            p-label="New Line?"
+            p-clean
+            p-required
+          ></po-switch>
+          <po-switch
+            class="po-md-4"
+            name="required"
+            formControlName="required"
+            p-label="Required?"
+            p-clean
+            p-required
+          ></po-switch>
+          <po-input
+            class="po-md-4"
+            name="iniValue"
+            formControlName="iniValue"
+            p-label="Initial Value"
+            p-clean
+          >
+          </po-input>
+          <po-input
+            class="po-md-4"
+            name="help"
+            formControlName="help"
+            p-label="Help"
+            p-clean
+          >
+          </po-input>
+        </div>
+      </form>
+    </po-modal>
   </div>
 </po-page-edit>
