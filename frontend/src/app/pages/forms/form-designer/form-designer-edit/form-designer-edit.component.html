@@ -53,4 +53,26 @@
       </po-input>
     </div>
   </form>
+  <po-divider p-label="Fields"></po-divider>
+  <div class="detail">
+    <!-- align button to the right -->
+    <div class="po-row" style="justify-content: flex-end">
+      <po-button class="po-md" p-label="Add" (p-click)="addFormField()">
+      </po-button>
+    </div>
+    <po-table
+      p-sort
+      p-striped
+      p-actions-right
+      p-single-select
+      [p-selectable]="true"
+      [p-items]="modalItemsData"
+      [p-columns]="modalItemsColumns"
+      [p-actions]="modalItemsActions"
+    ></po-table>
+  </div>
+
+  <div class="modal">
+    <po-modal #modalItems p-title="PO Modal"> We are TOTVERS!!! </po-modal>
+  </div>
 </po-page-edit>

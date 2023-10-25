@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PoBreadcrumb, PoNotificationService } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoModalComponent, PoNotificationService, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { RestService } from 'src/app/services/rest.service';
 
 @Component({
@@ -10,9 +10,10 @@ import { RestService } from 'src/app/services/rest.service';
   styleUrls: ['./form-designer-edit.component.scss']
 })
 export class FormDesignerEditComponent {
-
+  @ViewChild(PoModalComponent, { static: true }) modalItems!: PoModalComponent;
   myForm!: FormGroup;
   id!: string | null;
+
   breadcrumb: PoBreadcrumb = {
     items: [
       { label: 'Home', action: () => this.router.navigate(['/']) },
@@ -20,6 +21,25 @@ export class FormDesignerEditComponent {
       { label: 'Edit' }
     ]
   }
+
+  // modalItems
+  modalItemsData: any[] = [
+    {
+      fieldName: 'teste'
+    }
+  ];
+  modalItemsColumns: Array<PoTableColumn> = [
+    {
+      property: 'fieldName',
+      label: 'Field Name',
+    }
+  ]
+  modalItemsActions: Array<PoTableAction> = [
+    {
+      label: 'Edit',
+      action: this.addFormField.bind(this)
+    }
+  ]
 
   constructor(
     private router: Router,
@@ -46,6 +66,7 @@ export class FormDesignerEditComponent {
   getData() {
     this.rest.get(`/forms/form-designer/${this.id}`).subscribe((res: any) => {
       this.myForm.patchValue(res);
+      this.modalItemsData = res.FormField;
     }, (err: any) => {
       console.log(err);
     });
@@ -71,5 +92,14 @@ export class FormDesignerEditComponent {
 
   cancel() {
     this.router.navigate(['/form-designer']);
+  }
+
+  // form field
+
+  addFormField(item?: any){
+    console.log(item);
+    this.modalItems.open();
+    console.log(this.modalItemsData);
+    
   }
 }
