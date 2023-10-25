@@ -34,7 +34,7 @@ export class FormDesignerController {
       const result = await this.storeOrUpdate(formTable);
       return res.json(result);
     } catch (error) {
-      return res.json(error.message).status(500);
+      return res.status(500).json(error.message);
     }
   }
 
@@ -45,7 +45,7 @@ export class FormDesignerController {
       const result = await this.delete(parseInt(data.id));
       return res.json(result);
     } catch (error) {
-      return res.json(error.message).status(500);
+      return res.status(500).json(error.message);
     }
   }
 
@@ -55,9 +55,6 @@ export class FormDesignerController {
     const result = await this.prisma.formTable.findMany({
       where: {
         deleted: false,
-      },
-      include: {
-        FormField: true,
       },
     });
 
@@ -70,7 +67,11 @@ export class FormDesignerController {
         id,
       },
       include: {
-        FormField: true,
+        FormField: {
+          where: {
+            deleted: false,
+          },
+        },
       },
     });
 
@@ -78,7 +79,7 @@ export class FormDesignerController {
   }
 
   async storeOrUpdate(formTable): Promise<FormTable> {
-    const { id, ...rest } = formTable;
+    const { id, FormField, ...rest } = formTable;
     const result = await this.prisma.formTable.upsert({
       where: {
         id: id,
@@ -90,6 +91,25 @@ export class FormDesignerController {
         FormField: true,
       },
     });
+
+    // delete all form fields
+    await this.prisma.formField.updateMany({
+      where: {
+        formTableId: result.id,
+      },
+      data: {
+        deleted: true,
+      },
+    });
+    // create new form fields
+    for (const formField of FormField) {
+      await this.prisma.formField.create({
+        data: {
+          ...formField,
+          formTableId: result.id,
+        },
+      });
+    }
 
     return result;
   }

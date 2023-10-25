@@ -54,6 +54,7 @@ export class FormDesignerEditComponent {
   save() {
     if (this.myForm.valid) {
       const data = this.myForm.value;
+      data.FormField = [];
       if (this.id) data.id = parseInt(this.id);
 
       this.rest.post('/forms/form-designer', data).subscribe((res: any) => {
@@ -61,7 +62,7 @@ export class FormDesignerEditComponent {
         this.poNotification.success('Saved successfully!');
         this.router.navigate(['/form-designer']);
       }, (err: any) => {
-        this.poNotification.error('Error saving');
+        this.poNotification.error('Error saving: ' + err.error || 'Unknown error');
         console.log(err);
       }
       );
