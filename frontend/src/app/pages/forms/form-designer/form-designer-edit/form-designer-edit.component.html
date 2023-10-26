@@ -84,7 +84,7 @@
       <form [formGroup]="myFormItems">
         <div class="po-row">
           <po-input
-            class="po-md-4"
+            class="po-md-6"
             name="fieldName"
             formControlName="fieldName"
             p-label="Field Name"
@@ -92,6 +92,15 @@
             p-required
           >
           </po-input>
+          <po-select
+            class="po-md-6"
+            name="component"
+            formControlName="component"
+            p-label="Component"
+            [p-options]="myFormItemsComponentOptions"
+            p-clean
+            p-required
+          ></po-select>
           <po-input
             class="po-md-4"
             name="captionBr"
@@ -119,17 +128,8 @@
             p-required
           >
           </po-input>
-          <po-select
-            class="po-md-4"
-            name="component"
-            formControlName="component"
-            p-label="Component"
-            [p-options]="myFormItemsComponentOptions"
-            p-clean
-            p-required
-          ></po-select>
           <po-number
-            class="po-md-4"
+            class="po-md-3"
             name="grid"
             formControlName="grid"
             p-label="Grid"
@@ -139,7 +139,7 @@
             p-required
           ></po-number>
           <po-number
-            class="po-md-4"
+            class="po-md-3"
             name="order"
             formControlName="order"
             p-label="Order"
@@ -148,7 +148,7 @@
             p-required
           ></po-number>
           <po-switch
-            class="po-md-4"
+            class="po-md-3"
             name="isNewLine"
             formControlName="isNewLine"
             p-label="New Line?"
@@ -156,7 +156,7 @@
             p-required
           ></po-switch>
           <po-switch
-            class="po-md-4"
+            class="po-md-3"
             name="required"
             formControlName="required"
             p-label="Required?"
@@ -164,7 +164,7 @@
             p-required
           ></po-switch>
           <po-input
-            class="po-md-4"
+            class="po-md-6"
             name="iniValue"
             formControlName="iniValue"
             p-label="Initial Value"
@@ -172,7 +172,7 @@
           >
           </po-input>
           <po-input
-            class="po-md-4"
+            class="po-md-6"
             name="help"
             formControlName="help"
             p-label="Help"

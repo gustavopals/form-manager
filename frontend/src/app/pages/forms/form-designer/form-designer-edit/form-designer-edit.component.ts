@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PoBreadcrumb, PoModalAction, PoModalComponent, PoNotificationService, PoSelectOption, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { RestService } from 'src/app/services/rest.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import { randomInt } from "crypto";
 
 @Component({
   selector: 'app-form-designer-edit',
@@ -12,7 +14,8 @@ import { RestService } from 'src/app/services/rest.service';
 export class FormDesignerEditComponent {
   @ViewChild(PoModalComponent, { static: true }) modalItems!: PoModalComponent;
   myForm!: FormGroup;
-  myFormItems!: FormGroup;
+  myFormItems!: FormGroup
+  myFormItemsIni!: any
   id!: string | null;
   breadcrumb!: PoBreadcrumb
   modalItemsData!: any[]
@@ -27,6 +30,7 @@ export class FormDesignerEditComponent {
     private activatedRoute: ActivatedRoute,
     private rest: RestService,
     private poNotification: PoNotificationService,
+    private utils: UtilsService
   ) { }
 
   ngOnInit() {
@@ -71,18 +75,23 @@ export class FormDesignerEditComponent {
   // form field
 
   addFormField(item?: any) {
-    console.log(item);
+    if (item) this.myFormItems.patchValue(item);
     this.modalItems.open();
-    console.log(this.modalItemsData);
   }
 
   saveFormField() {
     if (this.myFormItems.valid) {
-      this.modalItemsData.push(this.myFormItems.value);
+      if (this.myFormItems.value.id) {
+        const index = this.modalItemsData.findIndex((item) => item.id === this.myFormItems.value.id);
+        this.modalItemsData[index] = this.myFormItems.value;
+      } else {
+        this.myFormItems.value.id = this.utils.getRandomInt()
+        this.modalItemsData.push(this.myFormItems.value);
+      }
       this.modalItems.close();
-      this.myFormItems.reset();
+      this.myFormItems.reset(this.myFormItemsIni);
     } else {
-      this.poNotification.warning('Invalid form');
+      this.utils.formErrorHandler(this.myFormItems);
     }
   }
 
@@ -100,11 +109,12 @@ export class FormDesignerEditComponent {
       captionEs: ['', [Validators.required]],
     });
     this.myFormItems = this.formBuilder.group({
+      id: ['', []],
       fieldName: ['', [Validators.required]],
       captionBr: ['', [Validators.required]],
       captionEn: ['', [Validators.required]],
       captionEs: ['', [Validators.required]],
-      component: ['', [Validators.required]],
+      component: ['text', [Validators.required]],
       grid: ['', [Validators.required]],
       order: ['', [Validators.required]],
       isNewLine: [false, [Validators.required]],
@@ -112,6 +122,7 @@ export class FormDesignerEditComponent {
       iniValue: ['', []],
       help: ['', []],
     });
+    this.myFormItemsIni = this.myFormItems.value;
     this.breadcrumb = {
       items: [
         { label: 'Home', action: () => this.router.navigate(['/']) },

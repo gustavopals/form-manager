@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Body,
   Controller,
@@ -102,7 +103,7 @@ export class FormDesignerController {
       },
     });
     // create new form fields
-    for (const formField of FormField) {
+    for (const { id, ...formField } of FormField) {
       await this.prisma.formField.create({
         data: {
           ...formField,
