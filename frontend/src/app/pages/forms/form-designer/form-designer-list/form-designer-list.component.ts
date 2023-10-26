@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PoBreadcrumb, PoPageAction, PoPageFilter, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoI18nService, PoPageAction, PoPageFilter, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { LanguageService } from 'src/app/services/language.service';
 import { RestService } from 'src/app/services/rest.service';
 import { environment } from 'src/environments/environment';
 
@@ -11,10 +12,14 @@ import { environment } from 'src/environments/environment';
 })
 export class FormDesignerListComponent {
 
+  literals: any = {};
+
   constructor(
     private router: Router,
-    private rest: RestService
+    private rest: RestService,
+    private language: LanguageService
   ) {
+    this.literals = this.language.getLiterals();
     this.getData();
   }
 

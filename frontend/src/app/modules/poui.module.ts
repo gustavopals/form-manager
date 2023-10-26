@@ -8,6 +8,8 @@ import {
   PoDividerModule,
   PoDropdownModule,
   PoFieldModule,
+  PoI18nConfig,
+  PoI18nModule,
   PoInfoModule,
   PoListViewModule,
   PoModalModule,
@@ -22,6 +24,23 @@ import {
   PoPageDynamicSearchModule,
   PoTemplatesModule,
 } from "@po-ui/ng-templates"
+import { generalPt } from "../shared/i18/generalPt"
+import { generalEn } from "../shared/i18/generalEn"
+
+const i18nConfig: PoI18nConfig = {
+  default: {
+    language: 'en-US',
+    context: 'general',
+    cache: true
+  },
+  contexts: {
+    general: {
+      'pt-BR': generalPt,
+      'en-US': generalEn
+    }
+  }
+};
+
 
 @NgModule({
   declarations: [],
@@ -46,6 +65,7 @@ import {
     PoListViewModule,
     PoInfoModule,
     PoContainerModule,
+    PoI18nModule.config(i18nConfig)
   ],
   exports: [],
   providers: [],
