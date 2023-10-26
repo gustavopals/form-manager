@@ -7,9 +7,14 @@ import { PoMenuItem } from '@po-ui/ng-components';
   styleUrls: ['./default.component.scss']
 })
 export class DefaultComponent {
+  logo = 'assets/images/logo.png'
   readonly menus: Array<PoMenuItem> = [
-    { label: 'Home', link: '/' },
-    { label: 'Form Designer', link: '/form-designer' }
+    { label: 'Home', shortLabel: 'Home', link: '/', icon: 'po-icon-home' },
+    {
+      label: 'Forms', shortLabel: 'Forms', icon: 'po-icon-edit', subItems: [
+        { label: 'Form Designer', shortLabel: 'Forms', link: '/form-designer', icon: 'po-icon-edit' },
+      ]
+    },
   ];
 
   private onClick() {
