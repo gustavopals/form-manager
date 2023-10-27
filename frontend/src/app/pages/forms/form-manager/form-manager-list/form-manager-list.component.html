@@ -1,1 +1,17 @@
-<p>form-manager-list works!</p>
+<po-page-list
+  [p-title]="'Form Manager'"
+  [p-actions]="actions"
+  [p-breadcrumb]="breadcrumb"
+>
+  <po-table
+    p-sort
+    p-striped
+    p-actions-right
+    [p-selectable]="true"
+    [p-columns]="tableDataColumns"
+    [p-items]="tableData"
+    [p-actions]="tableDataActions"
+    [p-service-delete]="deleteService"
+  >
+  </po-table>
+</po-page-list>

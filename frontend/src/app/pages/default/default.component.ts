@@ -13,6 +13,7 @@ export class DefaultComponent {
     {
       label: 'Forms', shortLabel: 'Forms', icon: 'po-icon-edit', subItems: [
         { label: 'Form Designer', shortLabel: 'Forms', link: '/form-designer', icon: 'po-icon-edit' },
+        { label: 'Form Manager', shortLabel: 'Forms', link: '/form-manager', icon: 'po-icon-edit' },
       ]
     },
   ];

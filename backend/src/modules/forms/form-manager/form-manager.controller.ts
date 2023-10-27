@@ -7,15 +7,21 @@ import { PrismaService } from 'src/shared/services/prisma.service';
 export class FormManagerController {
   constructor(private prisma: PrismaService) {}
 
-  @Get(':id')
+  @Get('structure/:id')
   async handleGetStructure(@Param() params, @Res() res: Response) {
     const result = await this.getStructure(parseInt(params.id));
     return res.json(result);
   }
 
+  @Get(':id')
+  async handleIndex(@Param() params, @Res() res: Response) {
+    const result = await this.index(parseInt(params.id));
+    return res.json(result);
+  }
+
   /************************/
 
-  async getStructure(id): Promise<FormTable> {
+  async getStructure(id: number): Promise<FormTable> {
     const result = await this.prisma.formTable.findUnique({
       where: {
         id,
@@ -30,5 +36,9 @@ export class FormManagerController {
     });
 
     return result;
+  }
+
+  async index(id: number): Promise<any> {
+    return [id];
   }
 }

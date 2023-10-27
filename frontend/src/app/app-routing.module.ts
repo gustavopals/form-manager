@@ -14,6 +14,10 @@ const routes: Routes = [
       {
         path: "form-designer",
         loadChildren: () => import('./modules/forms/form-designer/form-designer.module').then(m => m.FormDesignerModule),
+      },
+      {
+        path: "form-manager",
+        loadChildren: () => import('./modules/forms/form-manager/form-manager.module').then(m => m.FormManagerModule),
       }
     ]
   }
