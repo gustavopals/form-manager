@@ -13,6 +13,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { DefaultComponent } from './pages/default/default.component';
 import { FormDesignerListComponent } from './pages/forms/form-designer/form-designer-list/form-designer-list.component';
 import { FormDesignerEditComponent } from './pages/forms/form-designer/form-designer-edit/form-designer-edit.component';
+import { FormManagerEditComponent } from './pages/forms/form-manager/form-manager-edit/form-manager-edit.component';
+import { FormManagerListComponent } from './pages/forms/form-manager/form-manager-list/form-manager-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { FormDesignerEditComponent } from './pages/forms/form-designer/form-desi
     HomeComponent,
     DefaultComponent,
     FormDesignerListComponent,
-    FormDesignerEditComponent
+    FormDesignerEditComponent,
+    FormManagerEditComponent,
+    FormManagerListComponent
   ],
   imports: [
     BrowserModule,
