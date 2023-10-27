@@ -16,22 +16,24 @@ datasource db {
 }
 
 model FormTable {
-  id        Int         @id @unique @default(autoincrement())
-  tableName String      @unique
-  code      String
-  captionBr String
-  captionEn String
-  captionEs String
-  deleted   Boolean     @default(false)
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  FormField FormField[]
+  id         Int          @id @unique @default(autoincrement())
+  tableName  String       @unique
+  code       String
+  captionBr  String
+  captionEn  String
+  captionEs  String
+  deleted    Boolean      @default(false)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  FormField  FormField[]
+  FormHeader FormHeader[]
+  FormDetail FormDetail[]
 }
 
 model FormField {
-  id          Int       @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   formTableId Int
-  formTable   FormTable @relation(fields: [formTableId], references: [id])
+  formTable   FormTable    @relation(fields: [formTableId], references: [id])
   fieldName   String
   captionBr   String
   captionEn   String
@@ -43,7 +45,33 @@ model FormField {
   required    Boolean
   iniValue    String
   help        String
-  deleted     Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  deleted     Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  FormDetail  FormDetail[]
+}
+
+model FormHeader {
+  id          Int          @id @default(autoincrement())
+  formTable   FormTable    @relation(fields: [formTableId], references: [id])
+  formTableId Int
+  code        String
+  formString  String
+  deleted     Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  FormDetail  FormDetail[]
+}
+
+model FormDetail {
+  id           Int        @id @default(autoincrement())
+  formTable    FormTable  @relation(fields: [formTableId], references: [id])
+  formTableId  Int
+  formField    FormField  @relation(fields: [formFieldId], references: [id])
+  formFieldId  Int
+  formHeader   FormHeader @relation(fields: [formHeaderId], references: [id])
+  formHeaderId Int
+  deleted      Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
