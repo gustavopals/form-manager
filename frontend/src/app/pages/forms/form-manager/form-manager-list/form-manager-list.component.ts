@@ -18,10 +18,29 @@ export class FormManagerListComponent {
     { label: 'Refresh', action: this.getData.bind(this) },
   ];
 
+  tableDataColumns: Array<PoTableColumn> = [
+    {
+      property: 'id',
+      label: 'ID',
+      visible: false,
+    },
+    {
+      property: 'tableName',
+      label: 'Table Name',
+    },
+    {
+      property: 'code',
+      label: 'Code',
+    },
+    {
+      property: 'captionBr',
+      label: 'Caption BR',
+    }
+  ];
+
   literals: any;
   formStructure: any;
   breadcrumb!: PoBreadcrumb
-  tableDataColumns: Array<PoTableColumn> = []
   tableDataActions: Array<PoTableAction> = []
   deleteService: string = `${environment.baseUrl}/forms/form-manager`;
   tableData: Array<object> = [];
