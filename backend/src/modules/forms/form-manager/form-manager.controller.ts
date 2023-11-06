@@ -39,6 +39,12 @@ export class FormManagerController {
   }
 
   async index(id: number): Promise<any> {
-    return [id];
+    const result = await this.prisma.formHeader.findMany({
+      where: {
+        formTableId: id,
+      },
+    });
+
+    return result;
   }
 }
