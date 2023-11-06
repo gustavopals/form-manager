@@ -13,38 +13,9 @@ import { environment } from 'src/environments/environment';
 })
 export class FormManagerListComponent {
 
-  public readonly actions: Array<PoPageAction> = [
-    { label: 'New', url: '/form-manager/new' },
-    { label: 'Refresh', action: this.getData.bind(this) },
-  ];
-
-  public readonly tableDataActions: Array<PoTableAction> = [
-    {
-      label: 'Edit',
-      action: this.edit.bind(this),
-    }
-  ]
-
-  tableDataColumns: Array<PoTableColumn> = [
-    {
-      property: 'id',
-      label: 'ID',
-      visible: false,
-    },
-    {
-      property: 'tableName',
-      label: 'Table Name',
-    },
-    {
-      property: 'code',
-      label: 'Code',
-    },
-    {
-      property: 'captionBr',
-      label: 'Caption BR',
-    }
-  ];
-
+  actions!: Array<PoPageAction>
+  tableDataActions!: Array<PoTableAction>
+  tableDataColumns!: Array<PoTableColumn>
   literals: any;
   formStructure: any;
   breadcrumb!: PoBreadcrumb
@@ -59,6 +30,7 @@ export class FormManagerListComponent {
     private formService: FormsService,
   ) {
     this.literals = this.language.getLiterals();
+    this.initializeFields()
     this.getStructure();
     this.getData();
   }
@@ -91,5 +63,34 @@ export class FormManagerListComponent {
     };
     this.deleteService = `${environment.baseUrl}/forms/form-manager`;
     this.tableData = [];
+    this.actions = [
+      { label: 'New', url: '/form-manager/new' },
+      { label: 'Refresh', action: this.getData.bind(this) },
+    ];
+    this.tableDataActions = [
+      {
+        label: 'Edit',
+        action: this.edit.bind(this),
+      }
+    ]
+    this.tableDataColumns = [
+      {
+        property: 'id',
+        label: 'ID',
+        visible: false,
+      },
+      {
+        property: 'tableName',
+        label: 'Table Name',
+      },
+      {
+        property: 'code',
+        label: 'Code',
+      },
+      {
+        property: 'captionBr',
+        label: 'Caption BR',
+      }
+    ];
   }
 }
