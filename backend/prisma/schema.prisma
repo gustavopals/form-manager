@@ -71,6 +71,7 @@ model FormDetail {
   formFieldId  Int
   formHeader   FormHeader @relation(fields: [formHeaderId], references: [id])
   formHeaderId Int
+  value        String
   deleted      Boolean    @default(false)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt

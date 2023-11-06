@@ -18,6 +18,13 @@ export class FormManagerListComponent {
     { label: 'Refresh', action: this.getData.bind(this) },
   ];
 
+  public readonly tableDataActions: Array<PoTableAction> = [
+    {
+      label: 'Edit',
+      action: this.edit.bind(this),
+    }
+  ]
+
   tableDataColumns: Array<PoTableColumn> = [
     {
       property: 'id',
@@ -41,7 +48,6 @@ export class FormManagerListComponent {
   literals: any;
   formStructure: any;
   breadcrumb!: PoBreadcrumb
-  tableDataActions: Array<PoTableAction> = []
   deleteService: string = `${environment.baseUrl}/forms/form-manager`;
   tableData: Array<object> = [];
   filterSettings!: PoPageFilter
@@ -83,31 +89,6 @@ export class FormManagerListComponent {
         { label: 'Form Manager' }
       ]
     };
-    this.tableDataColumns = [
-      {
-        property: 'id',
-        label: 'ID',
-        visible: false,
-      },
-      {
-        property: 'tableName',
-        label: 'Table Name',
-      },
-      {
-        property: 'code',
-        label: 'Code',
-      },
-      {
-        property: 'captionBr',
-        label: 'Caption BR',
-      }
-    ];
-    this.tableDataActions = [
-      {
-        label: 'Edit',
-        action: this.edit.bind(this),
-      }
-    ]
     this.deleteService = `${environment.baseUrl}/forms/form-manager`;
     this.tableData = [];
   }
