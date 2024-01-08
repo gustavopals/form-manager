@@ -1,1 +1,18 @@
-<p>form-manager-edit works!</p>
+<po-page-edit
+  p-title="Form Manager"
+  [p-breadcrumb]="breadcrumb"
+  (p-save)="save()"
+  (p-cancel)="cancel()"
+>
+  <div *ngIf="formStructure">
+    <h4>Formulário - {{ formStructure.captionBr }}</h4>
+
+    <div
+      *ngFor="let formField of formStructure.FormField"
+      [ngSwitch]="formField.COMPONENT"
+      id="{{ formStructure.tableName + '-' + formField.fieldName }}"
+    >
+      oi
+    </div>
+  </div>
+</po-page-edit>
