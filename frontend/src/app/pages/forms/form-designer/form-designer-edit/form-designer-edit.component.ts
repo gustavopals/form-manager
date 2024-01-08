@@ -72,6 +72,10 @@ export class FormDesignerEditComponent {
     this.router.navigate(['/form-designer']);
   }
 
+  deleteItems(item: any) {
+    this.modalItemsData = item
+  }
+
   // form field
 
   addFormField(item?: any) {

@@ -65,6 +65,8 @@
       [p-items]="modalItemsData"
       [p-columns]="modalItemsColumns"
       [p-actions]="modalItemsActions"
+      (p-delete-items)="deleteItems($event)"
+      [p-hide-batch-actions]="false"
     ></po-table>
     <br />
     <div class="po-row" style="justify-content: flex-end">
