@@ -80,16 +80,14 @@ export class FormManagerListComponent {
         visible: false,
       },
       {
-        property: 'tableName',
-        label: 'Table Name',
-      },
-      {
         property: 'code',
         label: 'Code',
       },
       {
-        property: 'captionBr',
-        label: 'Caption BR',
+        property: 'createdAt',
+        label: 'Data',
+        type: 'date',
+        format: 'dd/MM/YY hh:mm'
       }
     ];
   }
