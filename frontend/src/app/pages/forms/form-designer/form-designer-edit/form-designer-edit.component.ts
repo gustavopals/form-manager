@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PoBreadcrumb, PoModalAction, PoModalComponent, PoNotificationService, PoSelectOption, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { RestService } from 'src/app/services/rest.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { randomInt } from "crypto";
 
 @Component({
   selector: 'app-form-designer-edit',
@@ -72,9 +71,6 @@ export class FormDesignerEditComponent {
     this.router.navigate(['/form-designer']);
   }
 
-  deleteItems(item: any) {
-    this.modalItemsData = item
-  }
 
   // form field
 
@@ -98,6 +94,11 @@ export class FormDesignerEditComponent {
       this.utils.formErrorHandler(this.myFormItems);
     }
   }
+
+  deleteItems(item: any) {
+    this.modalItemsData = item
+  }
+
 
   // params
 
