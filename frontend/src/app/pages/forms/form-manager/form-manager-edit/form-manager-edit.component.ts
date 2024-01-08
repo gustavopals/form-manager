@@ -15,6 +15,7 @@ export class FormManagerEditComponent {
   id!: string | null;
   breadcrumb!: PoBreadcrumb
   formStructure: any;
+  formData: any = {};
 
   constructor(
     private router: Router,
@@ -35,7 +36,6 @@ export class FormManagerEditComponent {
   getStructure() {
     this.formStructure = this.formsService.getStructure()
     console.log(this.formStructure);
-    
   }
 
 
@@ -44,7 +44,18 @@ export class FormManagerEditComponent {
   }
 
   save() {
+    const params = {
+      formStructure: this.formStructure,
+      formData: this.formData
+    }
 
+    this.rest.post('/forms/form-manager', params).subscribe({
+      next: (res) => {
+        this.poNotification.success('Saved successfully!');
+        this.router.navigate(['/form-manager']);
+      },
+      error: (err) => console.error(err),
+    });
   }
 
   cancel() {

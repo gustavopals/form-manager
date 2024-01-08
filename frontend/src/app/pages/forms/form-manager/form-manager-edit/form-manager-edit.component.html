@@ -1,18 +1,26 @@
 <po-page-edit
-  p-title="Form Manager"
+  [p-title]="formStructure.captionBr"
   [p-breadcrumb]="breadcrumb"
   (p-save)="save()"
   (p-cancel)="cancel()"
 >
   <div *ngIf="formStructure">
-    <h4>Formulário - {{ formStructure.captionBr }}</h4>
-
     <div
       *ngFor="let formField of formStructure.FormField"
       [ngSwitch]="formField.COMPONENT"
       id="{{ formStructure.tableName + '-' + formField.fieldName }}"
     >
-      oi
+      <!-- po-input -->
+      <po-input
+        p-clean
+        [p-label]="formField.captionBr"
+        [name]="formField.fieldName"
+        [p-required]="formField.required"
+        [p-show-required]="formField.required"
+        [(ngModel)]="formData[formField.fieldName]"
+      >
+      </po-input>
     </div>
   </div>
+  {{ formData | json }}
 </po-page-edit>
