@@ -76,3 +76,13 @@ model FormDetail {
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 }
+
+model TabelaTeste {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  sobrenome String
+  idade     Int
+  deleted   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

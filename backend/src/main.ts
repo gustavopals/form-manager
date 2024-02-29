@@ -4,8 +4,11 @@ import { AppModule } from './modules/app/app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-  await app.listen(3000).then(() => {
-    console.log('Server is running on port 3000');
+  const serverUrl = process.env.SERVER_URL || 'http://localhost';
+  const port = process.env.PORT || 3000;
+
+  await app.listen(port).then(() => {
+    console.log(`Server is running on ${serverUrl}:${port}`);
   });
 }
 bootstrap();
